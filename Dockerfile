@@ -9,8 +9,9 @@ WORKDIR /work/website
 
 RUN --mount=type=bind,target=/work/website/package.json,src=./website/package.json \
     --mount=type=bind,target=/work/website/package-lock.json,src=./website/package-lock.json \
-    --mount=type=cache,id=npm-website,sharing=shared,target=/root/.npm \
-    npm ci --include=dev
+    --mount=type=cache,id=myapp-npm-website,sharing=shared,target=/root/.npm
+
+RUN npm ci --include=dev
 
 COPY ./website /work/website/
 COPY ./blueprints /work/blueprints/
